@@ -26,7 +26,7 @@ const Navbar = ({ isLightMode, toggleTheme }) => {
     <nav className={`navbar-main fixed top-0 w-full z-50 py-6 transition-all duration-500 ease-out opacity-0 translate-y-[-20px] ${hidden ? '-translate-y-full' : 'translate-y-0'} ${scrolled ? 'bg-manga-bg/50 backdrop-blur-md border-b border-manga-border' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         <div className="font-display text-xl text-manga-accent font-bold tracking-widest cursor-pointer" onClick={() => scrollTo('hero')}>
-          Ordinaryfeb<span className="text-manga-muted">.</span>
+          Aditya Febrian<span className="text-manga-muted">.</span>
         </div>
         
         <div className="flex items-center gap-8">

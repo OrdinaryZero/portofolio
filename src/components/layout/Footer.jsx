@@ -7,7 +7,7 @@ const Footer = () => {
         
         {/* Brand Section */}
         <div className="md:col-span-2">
-          <div className="text-3xl font-semibold text-manga-accent tracking-tighter mb-6">Ordinaryfeb<span className="text-manga-muted">.</span></div>
+          <div className="text-3xl font-semibold text-manga-accent tracking-tighter mb-6">Aditya Febrian<span className="text-manga-muted">.</span></div>
           <p className="text-manga-muted text-sm max-w-xs leading-relaxed italic mb-6">
             "Everything is connected, from the first line of code to the final visual panel."
           </p>
@@ -47,7 +47,7 @@ const Footer = () => {
       
       <div className="border-t border-manga-border pt-10 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="font-mono text-[9px] text-manga-muted tracking-[0.5em] uppercase">
-          © 2026 Ordinary Zero // THE END OF VOLUME 01.
+          © 2026 Aditya Febrian // THE END OF VOLUME 01.
         </div>
         <div className="flex gap-6 font-mono text-[9px] text-manga-muted uppercase tracking-widest">
           <a href="#" className="hover:text-manga-accent transition-colors">Privacy Policy</a>

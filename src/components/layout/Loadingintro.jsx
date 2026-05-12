@@ -62,7 +62,7 @@ const LoadingIntro = ({ onComplete }) => {
           静かなる世界へ
         </div>
         <h1 ref={textRef} className="font-sans text-xs md:text-sm text-manga-accent tracking-[0.2em] uppercase opacity-0">
-          ORDINARYFEB
+          Aditya Febrian
         </h1>
       </div>
     </div>

@@ -31,7 +31,7 @@ const AboutSect = () => {
         <div className="md:col-span-5 flex flex-col items-start about-reveal opacity-0">
           <div className="relative aspect-[3/4] w-full max-w-sm border border-manga-border bg-manga-bg p-3 shadow-2xl">
             <div className="w-full h-full relative overflow-hidden">
-              <img src={myPhoto} alt="Ordinaryfeb Profile" className="w-full h-full object-cover manga-image-filter" />
+              <img src={myPhoto} alt="Aditya Febrian Profile" className="w-full h-full object-cover manga-image-filter" />
               <div className="absolute inset-0 bg-gradient-to-t from-manga-bg to-transparent opacity-60"></div>
             </div>
             
@@ -64,7 +64,7 @@ const AboutSect = () => {
           
           <div className="space-y-4 font-sans text-manga-muted leading-relaxed text-sm md:text-base">
             <p>
-              Halo, saya <span className="text-manga-accent font-semibold">Ordinaryfeb</span>. Seorang mahasiswa program studi Teknologi Informasi di UIN Antasari yang memiliki dedikasi tinggi dalam merakit pengalaman digital.
+              Halo, saya <span className="text-manga-accent font-semibold">Aditya Febrian</span>. Seorang mahasiswa program studi Teknologi Informasi di UIN Antasari yang memiliki dedikasi tinggi dalam merakit pengalaman digital.
             </p>
             <p>
               Fokus utama saya terletak pada eksplorasi dan pengembangan web menggunakan framework seperti Laravel, rekayasa basis data dengan MySQL, hingga perancangan antarmuka menggunakan React. 

@@ -14,7 +14,7 @@ const HeroSect = () => {
           <div className="font-jp text-manga-muted text-sm tracking-widest opacity-0 hero-left-cascade">第一章 // VOL.01</div>
           
           <div className="opacity-0 hero-left-cascade">
-            <BlurText text="Ordinary Zero" className="text-5xl md:text-7xl font-semibold text-manga-accent tracking-tight h-[1.1em]" />
+            <BlurText text="Aditya Febrian" className="text-5xl md:text-7xl font-semibold text-manga-accent tracking-tight h-[1.1em]" />
             <DynamicTitle />
           </div>
           
