@@ -1,46 +1,51 @@
 import React, { useEffect, useRef } from 'react';
 import anime from 'animejs';
+import myPhoto from "../../assets/myPhoto.jpg";
 
 const StoryboardPanels = () => {
-  const containerRef = useRef(null);
+  const cardRef = useRef(null);
+  const glareRef = useRef(null);
 
   useEffect(() => {
-    const panels = containerRef.current.querySelectorAll('.story-panel');
-    
-    // Soft floating animation
     anime({
-      targets: panels,
-      translateY: () => anime.random(-15, 15),
-      translateX: () => anime.random(-5, 5),
-      rotate: () => anime.random(-2, 2),
-      duration: 6000,
+      targets: cardRef.current,
+      rotateX: () => anime.random(-8, 8),
+      rotateY: () => anime.random(-15, 15),
+      scale: [1, 1.03],
+      duration: 5000,
       direction: 'alternate',
       loop: true,
-      easing: 'easeInOutSine',
-      delay: anime.stagger(500)
+      easing: 'easeInOutSine'
+    });
+    anime({
+      targets: glareRef.current,
+      backgroundPositionX: ['-50%', '150%'],
+      backgroundPositionY: ['-50%', '150%'],
+      duration: 8000, loop: true, easing: 'linear'
     });
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-md aspect-square mx-auto">
-      {/* Panel 1 - Background */}
-      <div className="story-panel absolute top-0 left-0 w-2/3 h-2/3 bg-manga-panel border border-manga-border p-2 shadow-2xl opacity-60">
-        <div className="w-full h-full bg-manga-bg overflow-hidden relative">
-          <img src="https://images.unsplash.com/photo-1544365558-35aa4afcf11f?q=80&w=600&grayscale=1" className="w-full h-full object-cover manga-image-filter opacity-50" alt="sketch 1" />
-        </div>
-      </div>
+    <div className="perspective-container preserve-3d w-full max-w-sm ml-auto relative aspect-[3/4] origin-bottom-right">
+      <div ref={cardRef} className="will-change-transform transform-style-3d bg-manga-panel border border-manga-border p-3 flex flex-col h-full shadow-2xl relative overflow-hidden group">
+        
+        <div ref={glareRef} className="absolute inset-0 z-20 pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 60%)', backgroundSize: '200% 200%', opacity: 0.5 }}></div>
 
-      {/* Panel 2 - Midground */}
-      <div className="story-panel absolute bottom-10 right-0 w-3/5 h-1/2 bg-manga-panel border border-manga-border p-2 shadow-2xl z-10">
-        <div className="w-full h-full bg-manga-bg overflow-hidden relative">
-          <img src="https://images.unsplash.com/photo-1560961819-2ea5c21ce43f?q=80&w=600&grayscale=1" className="w-full h-full object-cover manga-image-filter" alt="sketch 2" />
+        {/* --- GANTI "src" DI BAWAH INI DENGAN FOTOMU NANTI --- */}
+        <div className="w-full h-full relative overflow-hidden bg-manga-bg" style={{ transform: 'translateZ(10px)' }}>
+          <img 
+            src={myPhoto} 
+            alt="My Photo" 
+            className="w-[120%] h-[120%] object-cover manga-image-filter group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-manga-panel to-transparent opacity-80"></div>
         </div>
-      </div>
-
-      {/* Panel 3 - Foreground Typography */}
-      <div className="story-panel absolute top-1/3 left-1/4 w-1/2 h-1/3 bg-manga-text text-manga-bg p-4 shadow-2xl z-20 flex flex-col justify-center">
-        <span className="font-jp text-xs mb-1">ポートフォリオ</span>
-        <span className="font-sans font-bold tracking-widest text-sm uppercase">Storyboard<br/>Sequence</span>
+        
+        {/* Teks Melayang (Parallax) */}
+        <div className="absolute bottom-6 left-6 font-sans space-y-1 z-10" style={{ transform: 'translateZ(30px)' }}>
+          <p className="text-[10px] font-mono tracking-widest uppercase opacity-70 text-manga-accent">PROFILE_DATA</p>
+          <h3 className="text-xl font-bold tracking-tighter uppercase leading-none text-manga-accent">Ordinaryfeb</h3>
+        </div>
       </div>
     </div>
   );

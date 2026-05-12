@@ -1,51 +1,40 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import anime from 'animejs';
 
-const titles = [
-  "Frontend Architect",
-  "Creative Developer",
-  "Motion Designer",
-  "Interactive Builder",
-  "Web Experience Crafter"
-];
+const titles = ["Interactive Builder", "Web Experience Crafter", "Creative Developer"];
 
 const DynamicTitle = () => {
   const [index, setIndex] = useState(0);
-  const textRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      // Menghilang ke atas
       anime({
-        targets: textRef.current,
+        targets: '.dynamic-text-anim',
         opacity: [1, 0],
-        translateY: [0, 10],
-        filter: ['blur(0px)', 'blur(4px)'],
-        duration: 800,
-        easing: 'easeInOutSine',
+        translateY: [0, -10],
+        duration: 400,
+        easing: 'easeInQuad',
         complete: () => {
           setIndex((prev) => (prev + 1) % titles.length);
+          // Muncul dari bawah
           anime({
-            targets: textRef.current,
+            targets: '.dynamic-text-anim',
             opacity: [0, 1],
-            translateY: [-10, 0],
-            filter: ['blur(4px)', 'blur(0px)'],
-            duration: 1200,
-            easing: 'easeOutQuart'
+            translateY: [10, 0],
+            duration: 600,
+            easing: 'easeOutQuad'
           });
         }
       });
-    }, 4500);
-
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <h2 
-      ref={textRef} 
-      className="text-3xl md:text-5xl font-light text-manga-text tracking-tight mt-2 manga-flicker"
-    >
+    <div className="text-xl md:text-2xl text-manga-muted font-sans mt-2 dynamic-text-anim will-change-transform">
       {titles[index]}
-    </h2>
+    </div>
   );
 };
 

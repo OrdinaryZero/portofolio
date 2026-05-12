@@ -11,7 +11,7 @@ const LoadingIntro = ({ onComplete }) => {
     document.body.style.overflow = 'hidden'; 
 
     const tl = anime.timeline({
-      easing: 'easeInOutSine', // Very soft easing
+      easing: 'easeInOutSine', 
       complete: () => {
         document.body.style.overflow = '';
         onComplete();
@@ -47,14 +47,13 @@ const LoadingIntro = ({ onComplete }) => {
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-[9999] bg-manga-bg flex items-center justify-center overflow-hidden">
-      {/* Manga Line Art/Character Background */}
-      <div ref={charRef} className="absolute inset-0 flex items-center justify-center opacity-0 origin-center">
+      {/* Background Gambar dengan alt kosong agar tidak bocor teks */}
+      <div ref={charRef} className="absolute inset-0 flex items-center justify-center opacity-0 origin-center pointer-events-none">
         <img 
           src="https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=1920&grayscale=1" 
-          alt="Artistic Character" 
+          alt="" 
           className="w-full h-full object-cover mix-blend-screen opacity-40 manga-image-filter"
         />
-        {/* Soft Vignette */}
         <div className="absolute inset-0 bg-radial-gradient from-transparent to-manga-bg"></div>
       </div>
 
@@ -63,7 +62,7 @@ const LoadingIntro = ({ onComplete }) => {
           静かなる世界へ
         </div>
         <h1 ref={textRef} className="font-sans text-xs md:text-sm text-manga-accent tracking-[0.2em] uppercase opacity-0">
-          Entering Archives
+          ORDINARYFEB
         </h1>
       </div>
     </div>
