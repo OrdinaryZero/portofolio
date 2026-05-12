@@ -1,34 +1,29 @@
-import Lenis from '@studio-freight/lenis'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react';
+import Lenis from '@studio-freight/lenis';
 
-export const useLenis = () => {
-  const lenisRef = useRef(null)
+export const useLenis = (onScroll) => {
+  const lenisRef = useRef(null);
 
   useEffect(() => {
-    lenisRef.current = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    })
+    const lenis = new Lenis({
+      duration: 1.8, // Slightly longer duration for cinematic feel
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      smoothWheel: true,
+    });
+    lenisRef.current = lenis;
 
-    function raf(time) {
-      lenisRef.current?.raf(time)
-      requestAnimationFrame(raf)
-    }
+    if (onScroll) lenis.on('scroll', onScroll);
 
-    requestAnimationFrame(raf)
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
 
     return () => {
-      lenisRef.current?.destroy()
-      lenisRef.current = null
-    }
-  }, [])
+      lenis.destroy();
+    };
+  }, [onScroll]);
 
-  return lenisRef.current
-}
+  return lenisRef.current;
+};

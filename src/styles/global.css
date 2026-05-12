@@ -1,69 +1,83 @@
 @import "tailwindcss";
 
 @theme {
-  /* 1. Definisi Warna (Otomatis jadi bg-manga-black, border-manga-black, dll) */
-  --color-manga-black: #111111;
-  --color-manga-white: #F7F7F5;
-  --color-manga-crimson: #900C3F;
-  --color-manga-gray: #D1D1D1;
+  /* Variabel ini akan otomatis berubah mengikuti mode */
+  --color-manga-bg: var(--bg);
+  --color-manga-panel: var(--panel);
+  --color-manga-border: var(--border);
+  --color-manga-text: var(--text);
+  --color-manga-muted: var(--muted);
+  --color-manga-accent: var(--accent);
 
-  /* 2. Definisi Font */
-  --font-display: "Bebas Neue", "Impact", sans-serif;
-  --font-jp: "Noto Sans JP", sans-serif;
-
-  /* 3. Definisi Shadow Hard-Edge ala Manga */
-  --shadow-manga: 8px 8px 0px 0px #111111;
-  --shadow-manga-hover: 12px 12px 0px 0px #900C3F;
-  --shadow-manga-sm: 4px 4px 0px 0px #111111;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Playfair Display", "Inter", sans-serif;
+  --font-jp: "Noto Serif JP", serif;
 }
 
-/* --- Base Styles --- */
 :root {
-  background-color: var(--color-manga-white);
-  color: var(--color-manga-black);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  /* Default Dark Mode */
+  --bg: #0a0a0a;
+  --panel: #141414;
+  --border: #2a2a2a;
+  --text: #e5e5e5;
+  --muted: #737373;
+  --accent: #ffffff;
 }
 
-/* Paper Grain Texture Overlay */
-body::before {
-  content: "";
+/* Light Mode Variables */
+.light-mode {
+  --bg: #f5f5f5;
+  --panel: #ffffff;
+  --border: #d4d4d4;
+  --text: #171717;
+  --muted: #737373;
+  --accent: #000000;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Manga Paper/Noise Texture */
+.manga-texture {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+  inset: 0;
   pointer-events: none;
   z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
 }
 
-/* Manga Panel Utility */
-.manga-panel {
-  @apply border-4 border-manga-black bg-manga-white shadow-manga relative overflow-hidden transition-all duration-300;
+/* Auto-scrolling Carousel (Marquee) */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.marquee-content {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* Halftone Pattern */
-.halftone-bg {
-  background-image: radial-gradient(var(--color-manga-black) 20%, transparent 20%);
-  background-size: 4px 4px;
+/* Filter Manga */
+.manga-image-filter {
+  filter: grayscale(100%) contrast(120%) brightness(0.9);
+  transition: filter 0.7s ease;
+}
+.manga-image-filter:hover {
+  filter: grayscale(0%) contrast(100%) brightness(1);
 }
 
-/* Speed Lines */
-.speed-lines {
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 10px,
-    var(--color-manga-black) 10px,
-    var(--color-manga-black) 11px
-  );
-  opacity: 0.1;
-}
-
-/* Clip Paths */
-.clip-diagonal { clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
-.clip-diagonal-reverse { clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%); }
-
-/* Lenis Fixes */
+/* Scrollbar & Lenis */
 html.lenis { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+.perspective-1000 { perspective: 1000px; } .transform-style-3d { transform-style: preserve-3d; }
