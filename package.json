@@ -1,15 +1,13 @@
 {
-  "name": "personal-portfolio-awwwards",
-  "homepage": "https://OrdinaryZero.github.io/personal-portfolio-awwwards/",
+  "name": "Ordinaryfeb",
+  "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-    
+    "preview": "vite preview"
   },
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",

@@ -1,15 +1,32 @@
 @import "tailwindcss";
-@config "../../tailwind.config.js";
 
+@theme {
+  /* 1. Definisi Warna (Otomatis jadi bg-manga-black, border-manga-black, dll) */
+  --color-manga-black: #111111;
+  --color-manga-white: #F7F7F5;
+  --color-manga-crimson: #900C3F;
+  --color-manga-gray: #D1D1D1;
+
+  /* 2. Definisi Font */
+  --font-display: "Bebas Neue", "Impact", sans-serif;
+  --font-jp: "Noto Sans JP", sans-serif;
+
+  /* 3. Definisi Shadow Hard-Edge ala Manga */
+  --shadow-manga: 8px 8px 0px 0px #111111;
+  --shadow-manga-hover: 12px 12px 0px 0px #900C3F;
+  --shadow-manga-sm: 4px 4px 0px 0px #111111;
+}
+
+/* --- Base Styles --- */
 :root {
-  background-color: #F7F7F5;
-  color: #111111;
+  background-color: var(--color-manga-white);
+  color: var(--color-manga-black);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Paper Grain Texture Override */
+/* Paper Grain Texture Overlay */
 body::before {
   content: "";
   position: fixed;
@@ -19,41 +36,34 @@ body::before {
   z-index: 9999;
 }
 
+/* Manga Panel Utility */
+.manga-panel {
+  @apply border-4 border-manga-black bg-manga-white shadow-manga relative overflow-hidden transition-all duration-300;
+}
+
 /* Halftone Pattern */
 .halftone-bg {
-  background-image: radial-gradient(#111111 20%, transparent 20%);
+  background-image: radial-gradient(var(--color-manga-black) 20%, transparent 20%);
   background-size: 4px 4px;
 }
 
-/* Speed Lines Gradient */
+/* Speed Lines */
 .speed-lines {
   background: repeating-linear-gradient(
     90deg,
     transparent,
     transparent 10px,
-    #111111 10px,
-    #111111 11px
+    var(--color-manga-black) 10px,
+    var(--color-manga-black) 11px
   );
   opacity: 0.1;
 }
 
-/* Manga Panel Base */
-.manga-panel {
-  @apply border-4 border-manga-black bg-manga-white shadow-manga relative overflow-hidden transition-all duration-300;
-}
+/* Clip Paths */
+.clip-diagonal { clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
+.clip-diagonal-reverse { clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%); }
 
-/* Manga Panel Cut/Diagonal */
-.clip-diagonal {
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
-}
-
-.clip-diagonal-reverse {
-  clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
-}
-
+/* Lenis Fixes */
 html.lenis { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
-.lenis.lenis-scrolling iframe { pointer-events: none; }
 ::-webkit-scrollbar { width: 0px; background: transparent; }
